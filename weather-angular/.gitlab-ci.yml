@@ -1,0 +1,17 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  image: node:20
+  script:
+    - npm install
+    - npm run build
+    - apt-get update -y && apt-get install -y openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H 168.119.96.187 >> ~/.ssh/known_hosts
+    - scp -r dist/weather-angular/browser/* root@168.119.96.187:/var/www/kamilk38/browser/
+  only:
+    - main

@@ -1,0 +1,30 @@
+<app-weather-background [weatherCode]="weatherCode()" [darkMode]="darkMode()" />
+<app-air-quality [uvIndex]="uvIndex()" />
+<button class="mode-toggle" (click)="toggleMode()">
+  {{ darkMode() ? '☀️' : '🌙' }}
+</button>
+<div class="layout" [class.light-mode]="!darkMode()">
+  <app-weather-card
+    [cityName]="cityName()"
+    [temperature]="temperature()"
+    [description]="description()"
+    [dateTime]="dateTime()"
+    [forecast]="forecast()"
+    [chartData]="chartData()"
+    [weatherCode]="weatherCode()"
+  />
+  <div class="right-column">
+    <app-cities-weather />
+    <app-weather-extra
+      [precipitation]="precipitation()"
+      [windSpeed]="windSpeed()"
+      [windDirection]="windDirection()"
+      [sunrise]="sunrise()"
+      [sunset]="sunset()"
+    />
+  </div>
+  <div class="location-bar">
+    <button class="location-btn" (click)="useMyLocation()">📍 Moja lokalizacja</button>
+    <app-favorites (selectCity)="onSelectCity($event)" />
+  </div>
+</div>

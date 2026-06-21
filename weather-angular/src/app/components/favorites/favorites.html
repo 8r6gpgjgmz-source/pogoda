@@ -1,0 +1,31 @@
+<div class="favorites-container">
+    <div class="favorites-input">
+      <input
+        type="text"
+        placeholder="Wpisz miasto..."
+        [value]="cityInput()"
+        (input)="cityInput.set(($event.target as HTMLInputElement).value)"
+        (keydown.enter)="addFavorite()"
+      />
+      <button (click)="addFavorite()">+</button>
+    </div>
+    @if (searchResults().length > 0) {
+        <div class="search-results">
+          @for (result of searchResults(); track result.name) {
+            <div class="result-item" (click)="pickResult(result)">
+              {{ result.name }}
+            </div>
+          }
+        </div>
+      }
+    @if (favorites().length > 0) {
+      <div class="favorites-list">
+        @for (city of favorites(); track city.name) {
+          <div class="favorite-item">
+            <button class="city-btn" (click)="select(city)">{{ city.name }}</button>
+            <button class="remove-btn" (click)="removeFavorite($index)">×</button>
+          </div>
+        }
+      </div>
+    }
+  </div>

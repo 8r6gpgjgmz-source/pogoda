@@ -1,0 +1,12 @@
+<button class="uv-btn" (click)="toggle()">🌡️</button>
+
+@if (isOpen()) {
+  <div class="uv-panel">
+    <h3>Indeks UV</h3>
+    <div class="uv-value" [style.color]="getUvColor()">{{ uvIndex() }}</div>
+    <div class="uv-label" [style.color]="getUvColor()">{{ getUvLabel() }}</div>
+    <div class="uv-bar">
+      <div class="uv-fill" [style.width.%]="(uvIndex() / 11) * 100" [style.background]="getUvColor()"></div>
+    </div>
+  </div>
+}

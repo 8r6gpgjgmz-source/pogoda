@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: weather_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_DB: weather_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123}
+      POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+  celery:
+    build: .
+    command: celery -A weather_project worker -P solo -l info
+    environment:
+      POSTGRES_DB: weather_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123}
+      POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+  celery-beat:
+    build: .
+    command: celery -A weather_project beat -l info --schedule /tmp/celerybeat-schedule
+    environment:
+      POSTGRES_DB: weather_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123}
+      POSTGRES_HOST: db
+      REDIS_URL: redis://redis:6379/1
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:

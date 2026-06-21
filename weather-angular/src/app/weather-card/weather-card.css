@@ -1,0 +1,110 @@
+mat-card {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #ffffff !important;
+}
+  
+  .temperature {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 16px 0 8px 0;
+    color: #ffffff;
+  }
+
+  .description {
+    font-size: 20px;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  mat-card-subtitle {
+    color: #ffffff !important;
+  }
+
+  .forecast {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 -1px 4px rgba(255, 255, 255, 0.05);
+    padding-top: 15px;
+  }
+  
+  .forecast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #ffffff;
+    padding-bottom: 8px;
+  }
+  
+  .forecast-item span:nth-child(2) {
+    font-size: 24px;
+  }
+  
+  .forecast-item span:nth-child(3) {
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .chart-container {
+    margin-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  app-weather-icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  mat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  mat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  .mat-mdc-card-title {
+    text-align: center !important;
+  }
+  
+  .mat-mdc-card-subtitle {
+    text-align: center !important;
+    color: #ffffff !important;
+  }
+
+  :host ::ng-deep .mat-mdc-card-title {
+    text-align: center !important;
+  }
+  
+  :host ::ng-deep .mat-mdc-card-subtitle {
+    text-align: center !important;
+  }
+
+  mat-card-header {
+    display: block !important;
+    text-align: center !important;
+  }
+
+  @media (max-width: 768px) {
+    mat-card {
+      margin: 0 auto;
+      max-width: 95vw;
+    }
+  }

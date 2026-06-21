@@ -1,0 +1,50 @@
+mat-card {
+  max-width: 300px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #ffffff !important;
+}
+  
+.city-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin: 0 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.05);
+}
+  
+  .city-row:last-child {
+    border-bottom: none;
+  }
+  
+  .city-name {
+    font-size: 16px;
+    flex: 1;
+  }
+  
+  .city-icon {
+    font-size: 24px;
+    margin: 0 12px;
+  }
+  
+  .city-temp {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  mat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  mat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  }

@@ -1,0 +1,72 @@
+.uv-btn {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 100;
+    transition: transform 0.2s ease;
+  }
+  
+  .uv-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .uv-panel {
+    position: fixed;
+    top: 72px;
+    left: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    width: 200px;
+    color: #ffffff;
+    z-index: 99;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .uv-panel h3 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  .uv-value {
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+  .uv-label {
+    font-size: 14px;
+    margin: 4px 0 12px 0;
+  }
+  
+  .uv-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .uv-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+
+  .uv-panel:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  }

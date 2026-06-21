@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Dodatkowe informacje</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="info-row">
+        <span class="info-icon">💧</span>
+        <span class="info-text">Prawdopodobieństwo opadów: {{ precipitation() }}%</span>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💨</span>
+        <span class="info-text">Prędkość wiatru: {{ windSpeed() }} km/h, {{ windDirectionLabel() }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🌅</span>
+        <span class="info-text">Wschód/Zachód słońca: {{ formatTime(sunrise()) }} / {{ formatTime(sunset()) }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>

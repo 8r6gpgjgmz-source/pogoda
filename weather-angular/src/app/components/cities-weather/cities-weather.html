@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Pogoda w Polsce</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @for (city of cities(); track city.city) {
+        <div class="city-row">
+          <span class="city-name">{{ city.city }}</span>
+          <span class="city-icon">{{ getIcon(city.weathercode) }}</span>
+          <span class="city-temp">{{ city.temperature }}°C</span>
+        </div>
+      } @empty {
+        <p style="text-align:center; opacity:0.6; padding:8px">Brak danych</p>
+      }
+    </mat-card-content>
+  </mat-card>
