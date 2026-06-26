@@ -1,0 +1,24 @@
+<div class="search-bar">
+  <input
+    type="text"
+    placeholder="Szukaj miasta lub lokalizacji..."
+    [value]="cityInput()"
+    (input)="onType($any($event.target).value)"
+    (keydown.enter)="search()"
+  />
+  @if (searchResults().length > 0) {
+    <div class="search-results">
+      @for (result of searchResults(); track result.name) {
+        <div class="result-item" (click)="pick(result)">
+          <span class="result-name">{{ result.name }}</span>
+          <button
+            class="star-btn"
+            [class.active]="isFavorite(result)"
+            (click)="addToFavorites(result, $event)"
+            title="Dodaj do ulubionych"
+          >★</button>
+        </div>
+      }
+    </div>
+  }
+</div>

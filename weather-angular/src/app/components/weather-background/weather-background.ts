@@ -17,18 +17,35 @@ export class WeatherBackground implements OnInit, OnDestroy {
   private animationId!: number;
   private objects: THREE.Object3D[] = [];
   private intervalId: any = null;
+  private useFallback = false;
 
   constructor() {
     effect(() => {
       const code = this.weatherCode();
       this.darkMode();
-      if (this.scene) this.buildScene(code);
+      if (this.useFallback) {
+        this.applyFallback(code);
+      } else if (this.scene) {
+        this.buildScene(code);
+      }
     });
   }
 
   ngOnInit(): void {
     const canvas = this.canvasRef.nativeElement;
-    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    try {
+      this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    } catch {
+      this.useFallback = true;
+    }
+
+    if (this.useFallback || !this.renderer.getContext()) {
+      this.useFallback = true;
+      canvas.style.display = 'none';
+      this.applyFallback(this.weatherCode());
+      return;
+    }
+
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.domElement.style.position = 'fixed';
     this.renderer.domElement.style.top = '0';
@@ -44,8 +61,31 @@ export class WeatherBackground implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    cancelAnimationFrame(this.animationId);
-    this.renderer.dispose();
+    if (this.animationId) cancelAnimationFrame(this.animationId);
+    if (this.intervalId) clearInterval(this.intervalId);
+    if (this.renderer) this.renderer.dispose();
+  }
+
+  private applyFallback(code: number): void {
+    const dark = this.darkMode();
+    let colors: [string, string];
+    if (code === -1) {
+      colors = dark ? ['#0a0a1a', '#1a1a2e'] : ['#263238', '#37474f'];
+    } else if (code === 0) {
+      colors = dark ? ['#1a6fc4', '#0d3a6b'] : ['#87CEEB', '#4a90d9'];
+    } else if (code <= 3) {
+      colors = dark ? ['#6b8cae', '#3a4a5e'] : ['#b0c4de', '#8fa3bd'];
+    } else if (code >= 61 && code <= 67) {
+      colors = dark ? ['#2c3e50', '#1a252f'] : ['#607d8b', '#455a64'];
+    } else if (code >= 71 && code <= 77) {
+      colors = dark ? ['#7a8fa6', '#4a5a6e'] : ['#e8f4f8', '#c5dde6'];
+    } else if (code >= 95) {
+      colors = dark ? ['#1a1a2e', '#0d0d1a'] : ['#37474f', '#263238'];
+    } else {
+      colors = dark ? ['#6b8cae', '#3a4a5e'] : ['#b0c4de', '#8fa3bd'];
+    }
+    document.body.style.background = `linear-gradient(160deg, ${colors[0]}, ${colors[1]})`;
+    document.body.style.backgroundAttachment = 'fixed';
   }
 
   private clearScene(): void {

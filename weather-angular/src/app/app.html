@@ -1,4 +1,5 @@
 <app-weather-background [weatherCode]="weatherCode()" [darkMode]="darkMode()" />
+<app-search-bar (selectCity)="onSelectCity($event)" />
 <app-air-quality [uvIndex]="uvIndex()" />
 <button class="mode-toggle" (click)="toggleMode()">
   {{ darkMode() ? '☀️' : '🌙' }}

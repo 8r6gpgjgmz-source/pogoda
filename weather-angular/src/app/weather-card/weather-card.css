@@ -3,26 +3,35 @@ mat-card {
   margin: 0 auto;
   text-align: center;
   padding: 32px;
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05)) !important;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   color: #ffffff !important;
 }
-  
+
+  .mat-mdc-card-title {
+    font-size: 26px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+  }
+
   .temperature {
-    font-size: 48px;
-    font-weight: bold;
-    margin: 16px 0 8px 0;
+    font-size: 56px;
+    font-weight: 700;
+    margin: 12px 0 6px 0;
     color: #ffffff;
+    text-shadow: 0 2px 16px rgba(255, 255, 255, 0.25);
+    line-height: 1;
   }
 
   .description {
-    font-size: 20px;
-    color: #ffffff;
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
+    letter-spacing: 0.3px;
   }
 
   mat-card-subtitle {
@@ -32,20 +41,29 @@ mat-card {
   .forecast {
     display: flex;
     justify-content: space-around;
-    margin-top: 15px;
+    gap: 8px;
+    margin-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 -1px 4px rgba(255, 255, 255, 0.05);
-    padding-top: 15px;
+    padding-top: 18px;
   }
-  
+
   .forecast-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-size: 14px;
     color: #ffffff;
-    padding-bottom: 8px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    flex: 1;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .forecast-item:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-3px);
   }
   
   .forecast-item span:nth-child(2) {
@@ -58,12 +76,11 @@ mat-card {
   }
 
   .chart-container {
-    margin-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 16px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    padding: 12px;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 14px;
   }
 
   app-weather-icon {

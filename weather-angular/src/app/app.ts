@@ -7,11 +7,12 @@ import { CitiesWeather } from './components/cities-weather/cities-weather';
 import { WeatherBackground } from './components/weather-background/weather-background';
 import { WeatherExtra } from './components/weather-extra/weather-extra';
 import { Favorites } from './components/favorites/favorites';
+import { SearchBar } from './components/search-bar/search-bar';
 import { AirQuality } from './components/air-quality/air-quality';
 
 @Component({
   selector: 'app-root',
-  imports: [WeatherCard, CitiesWeather, WeatherBackground, WeatherExtra, Favorites, AirQuality],
+  imports: [WeatherCard, CitiesWeather, WeatherBackground, WeatherExtra, Favorites, SearchBar, AirQuality],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
