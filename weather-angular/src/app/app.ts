@@ -69,7 +69,7 @@ export class App implements OnInit, OnDestroy {
     this.weatherService.getCity(city.lat, city.lon).subscribe(data => {
       const countryCode = data.address.country_code?.toUpperCase();
       const flag = countryCode ? String.fromCodePoint(...[...countryCode].map(c => 0x1F1E6 - 65 + c.charCodeAt(0))) : '';
-      this.fetchWeather(city.lat, city.lon, `${flag} ${city.name}`);
+      this.fetchWeather(city.lat, city.lon, flag ? `${flag} ${city.name}` : city.name);
     });
   }
 
@@ -84,7 +84,7 @@ export class App implements OnInit, OnDestroy {
           const city = data.address.city || data.address.town || data.address.village || data.address.municipality;
           const countryCode = data.address.country_code?.toUpperCase();
           const flag = countryCode ? String.fromCodePoint(...[...countryCode].map(c => 0x1F1E6 - 65 + c.charCodeAt(0))) : '';
-          this.cityName.set(`${flag} ${city}`);
+          this.cityName.set(flag ? `${flag} ${city}` : city);
         });
       },
       () => {
@@ -159,7 +159,7 @@ export class App implements OnInit, OnDestroy {
         const city = data.address.city || data.address.town || data.address.village || data.address.municipality;
         const countryCode = data.address.country_code?.toUpperCase();
         const flag = countryCode ? String.fromCodePoint(...[...countryCode].map(c => 0x1F1E6 - 65 + c.charCodeAt(0))) : '';
-        this.cityName.set(`${flag} ${city}`);
+        this.cityName.set(flag ? `${flag} ${city}` : city);
       });
     }
   }

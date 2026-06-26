@@ -1,5 +1,5 @@
 from celery import shared_task
-from django.core.cache import cache
+from datetime import datetime, timedelta
 import urllib.request
 import json
 from .models import WeatherRecord
@@ -28,11 +28,9 @@ def fetch_weather_task(name, lat, lon):
     except Exception as exc:
         raise fetch_weather_task.retry(exc=exc)
 
-    from datetime import datetime
-
-    now = datetime.now()
-    pad = lambda n: str(n).zfill(2)
-    current_time = f"{now.year}-{pad(now.month)}-{pad(now.day)}T{pad(now.hour)}:00"
+    utc_offset = data.get("utc_offset_seconds", 0)
+    local_now = datetime.utcnow() + timedelta(seconds=utc_offset)
+    current_time = local_now.strftime("%Y-%m-%dT%H:00")
     times = data["hourly"]["time"]
     index = times.index(current_time) if current_time in times else 0
 
