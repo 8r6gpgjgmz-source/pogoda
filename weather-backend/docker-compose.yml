@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:16-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_DB: weather_db
       POSTGRES_USER: postgres
@@ -10,9 +11,11 @@ services:
 
   redis:
     image: redis:7-alpine
+    restart: unless-stopped
 
   backend:
     build: .
+    restart: unless-stopped
     ports:
       - "8000:8000"
     environment:
@@ -31,6 +34,7 @@ services:
 
   celery:
     build: .
+    restart: unless-stopped
     command: celery -A weather_project worker -P solo -l info
     environment:
       POSTGRES_DB: weather_db
@@ -48,6 +52,7 @@ services:
 
   celery-beat:
     build: .
+    restart: unless-stopped
     command: celery -A weather_project beat -l info --schedule /tmp/celerybeat-schedule
     environment:
       POSTGRES_DB: weather_db
